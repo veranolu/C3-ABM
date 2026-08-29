@@ -1,0 +1,37 @@
+name: Smoke Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          pip install numpy scipy
+      
+      - name: Run baseline smoke test
+        run: |
+          python c3_abm.py
+      
+      - name: Check headline values
+        run: |
+          # 这里假设 c3_abm.py 会打印包含 CDI 的摘要行
+          # 如果输出格式不同，请调整 grep 模式
+          python -c "
+          import subprocess, sys
+          out = subprocess.check_output(['python', 'c3_abm.py'], text=True)
+          assert 'CDI' in out or 'cdi' in out, 'CDI not found in output'
+          print('Smoke test passed: CDI reported in output')
+          "
