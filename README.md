@@ -2,9 +2,14 @@ This repository corresponds to manuscript V9.39 (2026-08-23) under review at MDP
 
 # C3-ABM: Fossil-Anchor Simulation for the Dual-Caliber Blind Spot
 
+![Smoke Test](https://github.com/veranolu/C3-ABM/actions/workflows/smoke-test.yml/badge.svg)
+
 Companion agent-based model to the manuscript:
 
-> **"Beyond Algorithmic Accuracy: Dual-Caliber Analytics and Preference Resilience in Consumer Adaptation"**  
+> **"Beyond Algorithmic Accuracy: Dual-Caliber Analytics and Preference Resilience in Consumer Adaptation"**
+> by Dan Lu, Hongwei Liu, Xiuli Yu, and Dongdong Shi  
+> Manuscript V9.39 (2026-08-23), under review at *Information* (MDPI).
+
 > by Dan Lu, Hongwei Liu, Xiuli Yu, and Dongdong Shi  
 > Manuscript V9.39 (2026-08-23), under review at *Information* (MDPI).
 
@@ -47,6 +52,47 @@ channel is ON — an existence proof for the dual-caliber blind spot.
   — an identified boundary condition: when consolidation is too strong it
   dominates the cross-sectional richness channel, so the between-person
   veneer disappears.
+
+## Algorithm Overview
+
+The simulation implements a minimal two-timescale mechanism that generates the dual-caliber blind spot.  
+For readers who prefer pseudocode to Python, the logic of one replication is:
+
+```text
+Algorithm 1: Fossil-Agent Simulation (One Replication)
+
+Input:  N = 25,467 consumers, T = 100 sessions, K = 1,000 categories
+Output: within-person ρ, between-person r, CDI = r − ρ
+
+Initialize for each consumer i:
+    τ_i  ← LogNormal(0, 0.5²) normalized to mean 1       // activity trait
+    s_i  ← 0.85 with prob 0.30, else 0.25                // susceptibility class
+    θ_i  ← Dirichlet(0.5 · 1_K)                         // genuine taste
+    z_i  ← 0.8·(top-3 of θ_i) + 0.2/K                   // fossil anchor
+    w_i  ← 0                                            // consolidation weight
+
+For each session t = 1 … 100:
+    1. Taste shock (with prob λ_g = 0.05):
+       θ_i ← 0.6·θ_i + 0.4·Dirichlet(0.5·1_K)
+    2. Expressed profile:
+       x_i ← (1 − w_i)·θ_i + w_i·z_i, renormalized
+    3. Engagement & choice:
+       n_i ~ Poisson(3·τ_i)
+       c_i ~ Poisson(x_i · n_i)          // moment-equivalent to multinomial
+    4. Consolidate:
+       w_i ← min(w_i + δ·n_i·s_i·(1 + w_i), 0.95)
+    5. Dynamic-anchor condition only:
+       z_i ← 0.98·z_i + 0.02·(c_i / Σc_i)
+    6. Accumulate counts into first-half (t ≤ 50) or second-half (t &gt; 50) bins
+
+After session 100:
+    ρ ← Spearman(first-half HHI, second-half entropy growth)
+    r ← Pearson(log cumulative engagement, mean entropy)
+    CDI ← r − ρ
+
+Control conditions:
+    Ideal:   skip step 4 (w ≡ 0)
+    Random:  set x_i = 1/K in step 2
 
 ## Files
 
