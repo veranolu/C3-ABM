@@ -1,8 +1,12 @@
+This repository corresponds to manuscript V9.39 (2026-08-23) under review at MDPI Information.
+
 # C3-ABM: Fossil-Anchor Simulation for the Dual-Caliber Blind Spot
 
-Companion agent-based model to the manuscript
-**"The Dual-Caliber Blind Spot of Recommender Systems: A 27-Year Behavioral
-Diagnostic for Algorithmic Governance"**.
+Companion agent-based model to the manuscript:
+
+> **"Beyond Algorithmic Accuracy: Dual-Caliber Analytics and Preference Resilience in Consumer Adaptation"**  
+> by Dan Lu, Hongwei Liu, Xiuli Yu, and Dongdong Shi  
+> Manuscript V9.39 (2026-08-23), under review at *Information* (MDPI).
 
 ## What it shows
 
@@ -74,7 +78,7 @@ All new results reproducible via `run_sensitivity_v98b.py` / `run_final.py` / `r
 - Seed-7 replication check: -0.1484 / +0.2663 -> matches the frozen headline (-0.148 / +0.266)
 
 **Factorial grid share x delta (N = 3,000, seeds 3/7/11):**
-- reversal survives in 5/9 cells; CDI positive in 8/9 (range +0.030 to +0.486)
+- reversal survives in 4/9 cells; CDI positive in 8/9 (range +0.030 to +0.486)
 - boundary: share=20% with mild delta (<=0.003) no reversal (susceptible-population floor);
   delta=0.008 collapses the between-person association in all three rows
 
@@ -87,3 +91,6 @@ K=1,000: +0.415; K=10,000: +0.413 (identical within noise)
   -0.075 / -0.122 / -0.146 / -0.151 (monotone ordering matches; weakest-quartile sign missed)
 - tercile ordering preserved (low-consolidation consumers lose less diversity), levels shifted down
 - reading: qualitative corroboration of ordering/gradient, NOT distributional replication
+
+## Citation
+Lu, D., Liu, H., Yu, X., & Shi, D. Beyond Algorithmic Accuracy: Dual-Caliber Analytics and Preference Resilience in Consumer Adaptation. *Information* (under review).
