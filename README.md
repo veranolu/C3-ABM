@@ -70,6 +70,29 @@ failure to be repaired by retuning.
 | `requirements.txt` | Python dependencies |
 | `.github/workflows/smoke-test.yml` | CI smoke test |
 
+## Reproducibility tiers
+
+1. **Generative probe (fully reproducible from public code):** `c3_abm.py`
+   and `sim_rewb_boundary.py` run the agent world standalone; all simulation
+   outputs in the manuscript (Section 7, Figures B1–B4, `simA_summary.csv`)
+   can be regenerated without any restricted data.
+2. **Restricted-data Studies 1 and 3 (computational transparency):** the
+   exact analysis scripts, frozen result tables, and model specifications are
+   supplied, but the JDsearch- and JData-derived panels are **not
+   redistributed** under data-use agreements. `bootstrap_cdi.py` documents the
+   exact consumer-cluster bootstrap implementation (B = 2,000, seed 20260915)
+   behind the reported BCa intervals; its input `track1_panel.csv` is derived
+   from restricted JDsearch data, and authorized users should update the
+   local `PANEL`/`OUT_DIR` paths before running.
+3. **Amazon Study 2 (public source data):** the Amazon Reviews 2023 dataset
+   is publicly available from its original source; frozen result tables and
+   processing specifications are provided in `results_study2_study3.csv`.
+
+*Legacy field notice:* `simA_summary.csv` is a byte-frozen artifact of the
+2026-09-12 recalculation run; its `CDI_old` column is a deprecated legacy
+field denoting the archived split-half operationalization contrast Δop,
+**not a CDI** under the revised matched-estimand definition.
+
 ## Environment
 
 - Python ≥ 3.9; see `requirements.txt`
