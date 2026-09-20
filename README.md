@@ -4,7 +4,7 @@ Companion simulation and analysis code for the manuscript:
 
 > **"Two Timescales, Two Calibers: Auditing Consumer Adaptation in Algorithmically Mediated Environments"**
 > by Dan Lu, Hongwei Liu, Xiuli Yu, and Dongdong Shi
-> Manuscript information-4549232, revised version V9.59k, under review at *Information* (MDPI).
+> Manuscript information-4549232, revised version V9.59n, under review at *Information* (MDPI).
 
 ## What this repository contains
 
