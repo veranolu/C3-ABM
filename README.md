@@ -6,6 +6,8 @@ Companion analysis and simulation code for the manuscript:
 > by Dan Lu, Hongwei Liu, Xiuli Yu, and Dongdong Shi
 > Manuscript information-4549232, revised version V9.60B.6, under review at *Information* (MDPI).
 
+**Archived snapshot:** [https://doi.org/10.5281/zenodo.22913316](https://doi.org/10.5281/zenodo.22913316) (Zenodo; concept DOI, always resolves to the latest release; v1.0.1 is byte-identical to the locked tags except for this line).
+
 ## Repository structure (three tiers)
 
 | Tier | Contents | Role in manuscript |
